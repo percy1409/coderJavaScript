@@ -1,5 +1,8 @@
 //Variables Globales
 let flagNavegacion = true
+const librasPorKilogramo = 2.20462
+const centimetrosPorPie = 30.48;
+const millasPorKilometro = 0.621371;
                                        
 
 //Funciones utilizadas
@@ -8,7 +11,11 @@ function menuInicio(opcion){
                                                                  "\n 2.- Calcular la raiz cuadrada de un número"+ 
                                                                  "\n 3.- Calcular la potencia de un número"+ 
                                                                  "\n 4.- Calcular la serie Fibonacci"+
-                                                                 "\n 5.- Extra - Conversion de unidades"))
+                                                                 "\n 5.- Extra - Conversion de unidades"+
+                                                                 "\n 0.- Salir"))
+    if(opcion === null){
+        opcion = 0
+    }
     return opcion
 }
 
@@ -113,6 +120,91 @@ function calcularFibonacci(numero){
   return serie;
 }
 
+function menuMedidas(){
+    opcion = Number(prompt("Que tipo de operación desea realizar? \n 1.- Calcular equivalencia de kilogramos a libras"+
+                                                                 "\n 2.- Calcular equivalencia de centimetros a pies"+ 
+                                                                 "\n 3.- Calcular equivalencia de kilometros a millas"))
+    
+    switch(opcion){
+        case 1: 
+            kilogramosLibras();
+            break;
+        case 2:
+            centimetrosPies()
+            break;
+        case 3:
+            kilometrosMillas()
+            break;
+        default:
+            alert("Ingrese una opcion del 1 al 3")
+            break;
+    }
+    return opcion
+
+}
+
+function kilogramosLibras(){
+    numero = prompt("Ingrese la cantidad de kilos: ")    
+    if(numero === null){
+        return
+    }else if (!isNaN(numero) && !(numero === null)) {
+        numero = Number(numero)
+        libras = numero*librasPorKilogramo;
+        alert(numero+" kilogramos son "+libras+ " libras")
+        continuar = confirm("Desea continuar calculando libras?")
+        if(continuar){
+            kilogramosLibras()
+        }else{
+            menuMedidas()
+        }    
+    } else {
+        alert("Por favor, ingrese un número válido.");
+        kilogramosLibras()
+    }
+}
+
+function centimetrosPies(){
+    numero = prompt("Ingrese la cantidad de centimetros: ")    
+    if(numero === null){
+        return
+    }else if (!isNaN(numero) && !(numero === null)) {
+        numero = Number(numero)
+        pies = numero/centimetrosPorPie;
+        alert(numero+" centimetros son "+pies+ " pies")
+        continuar = confirm("Desea continuar calculando centimetros a pies?")
+        if(continuar){
+            centimetrosPies()
+        }    
+    } else {
+        alert("Por favor, ingrese un número válido.");
+        centimetrosPies()
+    }
+}
+
+function kilometrosMillas(){
+    numero = prompt("Ingrese la cantidad de kilometros: ")    
+    if(numero === null){
+        return
+    }else if (!isNaN(numero) && !(numero === null)) {
+        numero = Number(numero)
+        millas = numero*millasPorKilometro
+        alert(numero+" kilometros son  "+millas+ " millas")
+        continuar = confirm("Desea continuar calculando kilometros a millas?")
+        if(continuar){
+            kilometrosMillas()
+        }    
+    } else {
+        alert("Por favor, ingrese un número válido.");
+        kilometrosMillas()
+    }
+}
+
+function menuFinal(){
+    flagNavegacion =false;
+    alert("Gracias por utilizar la herramienta")
+}
+    
+
 
 
 //Logica
@@ -132,10 +224,14 @@ do {
             menuFibonacci()
             break;
         case 5:
-            console.log("5")
+            menuMedidas()
+            break;
+        case 0:
+            menuFinal()
             break;
         default:
             alert("Ingrese una opcion del 1 al 5")
             break;
     }
 } while (flagNavegacion);
+
